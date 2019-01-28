@@ -13,7 +13,7 @@ app.get(`/`, (req, res)=>{
 })
 
 app.post(`/epigrams`, (req, res)=>{
-    console.log(req);
+    console.log(req.body);
     epigram = new Epigram({ text: req.body.text,
     author: req.body.author });
 
