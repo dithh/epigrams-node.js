@@ -3,15 +3,15 @@ const {mongoose}= require(`./mongoose.js`);
 const Schema = mongoose.Schema;
 let epigramSchema = new Schema(
     {
-        body:{
+        text:{
            type:String,
-           require:true,
+           required:true,
            minlength:1,
            
         },
         author:{
             type:String,
-            require:true,
+            required:true,
             minlength:1,
             
         }
@@ -19,4 +19,8 @@ let epigramSchema = new Schema(
 
 
 
-let epigram = mongoose.model(`epigram`,epigramSchema);
+let Epigram = mongoose.model(`Epigram`,epigramSchema);
+
+module.exports={
+    Epigram,
+}
