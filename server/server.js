@@ -41,7 +41,7 @@ app.get(`/epigrams/:id`,(req, res)=>{
      }
     Epigram.findById(id).then((epigram)=>{
     if(epigram){
-    res.send(epigram);
+    res.send({epigram});
     } else {
         res.status(404).send("Document with that id was not found");
     }
