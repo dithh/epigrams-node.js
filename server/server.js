@@ -40,7 +40,7 @@ app.get(`/epigrams`, (req, res) => {
 });
 
 app.get(`/epigrams/:id`, (req, res) => {
-    let id = req.params.id;
+    const id = req.params.id;
     if (!ObjectID.isValid(id)) {
         return res.status(400).send({
             message: "id is not valid"
@@ -61,13 +61,9 @@ app.get(`/epigrams/:id`, (req, res) => {
 
 app.delete(`/epigrams/:id`, (req, res) => {
     let id = req.params.id;
-    if(!ObjectID.isValid(id)){
-        return res.status(400).send({
-            message:"id is not valid"
-        });
-    } 
-    Epigram.findByIdAndDelete(id).then((epigram)=>{
-        if (epigram){
+      if(validateId(id,req, res)){
+    Epigram.findByIdAndDelete(id).then((epigram) => {
+        if (epigram) {
             res.send({
                 epigram
             });
@@ -76,7 +72,27 @@ app.delete(`/epigrams/:id`, (req, res) => {
                 message: `document with that id was not found`
             })
         }
-    })
-} )
+    });
+}
+});
+
+app.patch(`/epigrams/:id`, (req, res) => {
+    const id = req.params.id;
+     if (validateId(id, req, res)){
+         
+     }
+    
+});
 
 app.listen(`3000`);
+
+
+function validateId(id ,req, res) {
+    if (!ObjectID.isValid(id)) {
+        res.status(400).send({
+            message: "id is not valid"
+        });
+        return false;
+    }
+  return true ;
+}
